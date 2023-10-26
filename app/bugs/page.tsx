@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { Button } from '@radix-ui/themes';
 
 const BugPage = () => {
   return (
-    <div>BugPage</div>
+    <div>
+      <Button>NEW BUG</Button>
+    </div>
   )
 }
 
