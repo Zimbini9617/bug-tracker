@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createBugSchema } from '@/app/validationSchema';
 import {z} from 'zod';
+import ErrorMessage from '@/app/components/ErrorMessage';
 
 const NewBugPage = () => {
   const {register, control, handleSubmit, formState: {errors}, } = useForm<BugForm>({
@@ -33,13 +34,16 @@ const NewBugPage = () => {
       <TextField.Root>
         <TextField.Input placeholder='title' {...register('title')}/>
       </TextField.Root>
-      {errors.description && <Text color='red' as='p'>{(errors.description.message)}</Text> }
-      <Controller control={control} name='description' render={({field})=> (<SimpleMDE placeholder='Description' {...field}/>)}/>
       
+      <ErrorMessage> {errors.title?.message}</ErrorMessage>
+
+      <Controller control={control} name='description' render={({field})=> (<SimpleMDE placeholder='Description' {...field}/>)}/>
+
+      <ErrorMessage> {errors.title?.message}</ErrorMessage>
       <Button>SUBMIT NEW BUG</Button>
     </form>
     </div>
-  )
-}
+  );
+};
 
 export default NewBugPage;
