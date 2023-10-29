@@ -1,19 +1,19 @@
 'use client'
 import React, {useState} from 'react';
-import { TextField, TextArea, Button, Callout } from '@radix-ui/themes';
+import { TextField, TextArea, Button, Callout, Text } from '@radix-ui/themes';
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from "react-hook-form";
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-
-interface BugForm{
-  title: string;
-  description: string;
-}
+import { zodResolver } from '@hookform/resolvers/zod';
+import { createBugSchema } from '@/app/validationSchema';
+import {z} from 'zod';
 
 const NewBugPage = () => {
-  const {register, control, handleSubmit} = useForm<BugForm>();
+  const {register, control, handleSubmit, formState: {errors}, } = useForm<BugForm>({
+    resolver:zodResolver(createBugSchema)
+  });
   const router = useRouter();
   const [error, setError] = useState('');
   return (
@@ -23,7 +23,6 @@ const NewBugPage = () => {
       </Callout.Root>)}
     <form className='space-y-3' onSubmit={handleSubmit(async (data)=>{
       try{
-        throw new Error();
         await axios.post('/api/bugs', data);
       router.push('/bugs')
       }
@@ -34,6 +33,7 @@ const NewBugPage = () => {
       <TextField.Root>
         <TextField.Input placeholder='title' {...register('title')}/>
       </TextField.Root>
+      {errors.description && <Text color='red' as='p'>{(errors.description.message)}</Text> }
       <Controller control={control} name='description' render={({field})=> (<SimpleMDE placeholder='Description' {...field}/>)}/>
       
       <Button>SUBMIT NEW BUG</Button>
