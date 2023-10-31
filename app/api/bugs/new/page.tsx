@@ -10,13 +10,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createBugSchema } from '@/app/validationSchema';
 import {z} from 'zod';
 import ErrorMessage from '@/app/components/ErrorMessage';
+import Spinner from '@/app/components/Spinner';
 
+type BugForm = z.infer<typeof createBugSchema>
 const NewBugPage = () => {
   const {register, control, handleSubmit, formState: {errors}, } = useForm<BugForm>({
     resolver:zodResolver(createBugSchema)
   });
   const router = useRouter();
   const [error, setError] = useState('');
+
+  const[isSubmitting, setSubmitting] = useState(false);
   return (
     <div className='max-w-xl'>
     {error && (<Callout.Root className='mb-5'>
@@ -24,10 +28,12 @@ const NewBugPage = () => {
       </Callout.Root>)}
     <form className='space-y-3' onSubmit={handleSubmit(async (data)=>{
       try{
+        setSubmitting(true)
         await axios.post('/api/bugs', data);
       router.push('/bugs')
       }
       catch(error){
+        setSubmitting(false)
         setError('Unexpected Error happened')
       }
     })}>
@@ -40,7 +46,7 @@ const NewBugPage = () => {
       <Controller control={control} name='description' render={({field})=> (<SimpleMDE placeholder='Description' {...field}/>)}/>
 
       <ErrorMessage> {errors.title?.message}</ErrorMessage>
-      <Button>SUBMIT NEW BUG</Button>
+      <Button disabled={isSubmitting}>SUBMIT NEW BUG {isSubmitting && <Spinner />} </Button>
     </form>
     </div>
   );

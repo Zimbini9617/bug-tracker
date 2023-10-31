@@ -11,7 +11,8 @@ const NavBar = () => {
   
   const links = [
     {id:1, href:'/', label:'Dashboard'},
-    {id:2, href:'/bugs', label:'Bugs'}
+    {id:2, href:'/bugs', label:'Bugs'},
+    {id:3, href:'https://cloud.mongodb.com/v2/653a5362dda6784ed197582f#/metrics/replicaSet/653a56106153ff132ed48309/explorer/bugtracker/Bug/find', label:'MongoDB'}
   ];
   return (
   <nav className='flex space-x-10 px-5 border-b h-14 mb-10 items-center transition-colors'>
