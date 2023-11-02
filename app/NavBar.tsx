@@ -10,9 +10,9 @@ const NavBar = () => {
   const pathname = usePathname();
   
   const links = [
-    {id:1, href:'/', label:'Dashboard'},
-    {id:2, href:'/bugs', label:'Bugs'},
-    {id:3, href:'https://cloud.mongodb.com/v2/653a5362dda6784ed197582f#/metrics/replicaSet/653a56106153ff132ed48309/explorer/bugtracker/Bug/find', label:'MongoDB'}
+    {id:1, href:'/', label:'DASHBOARD'},
+    {id:2, href:'/bugs', label:'BUGS'},
+    {id:3, href:'https://cloud.mongodb.com/v2/653a5362dda6784ed197582f#/metrics/replicaSet/653a56106153ff132ed48309/explorer/bugtracker/Bug/find', label:'MONGODB-CONNECTION'}
   ];
   return (
   <nav className='flex space-x-10 px-5 border-b h-14 mb-10 items-center transition-colors'>
@@ -20,7 +20,7 @@ const NavBar = () => {
       <AiFillBug className='text-3xl text-gray-700 hover:text-gray-400'/>
     </Link>
 
-    <ul className='flex space-x-10'>
+    <ul className='flex space-x-10 font-mono font-semibold text-slate-600 text-xl'>
       {links.map((link)=>(
         <Link 
         href={link.href} 
