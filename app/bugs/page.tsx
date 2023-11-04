@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table, Badge } from '@radix-ui/themes';
+import Link from 'next/link';
 import prisma from '@/prisma/client';
 import BugStatusBadge from './BugStatusBadge';
 import delay from 'delay';
@@ -24,7 +25,9 @@ const BugPage = async () => {
   {bugs.map((bug)=>(
     <Table.Row key={bug.id}>
     <Table.Cell>
-      {bug.title}{' '}
+      <Link href={'/bugs/${bug.id}'}>
+      {bug.title}
+      </Link>
       <div className='block md:hidden my-2'>
         <BugStatusBadge status= {bug.status}/>
         </div>
