@@ -1,10 +1,11 @@
 import React from 'react';
 import { Table, Badge } from '@radix-ui/themes';
-import Link from 'next/link';
+import Link from '../components/Link';
 import prisma from '@/prisma/client';
 import BugStatusBadge from './BugStatusBadge';
 import delay from 'delay';
 import BugActions from './BugActions';
+import classNames from 'classnames';
 
 const BugPage = async () => {
   const bugs = await prisma.bug.findMany();
@@ -25,7 +26,7 @@ const BugPage = async () => {
   {bugs.map((bug)=>(
     <Table.Row key={bug.id}>
     <Table.Cell>
-      <Link href={'/bugs/${bug.id}'}>
+    <Link href={`/bugs/${bug.id}`} >
       {bug.title}
       </Link>
       <div className='block md:hidden my-2'>
