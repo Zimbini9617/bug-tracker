@@ -3,13 +3,15 @@ import prisma from '@/prisma/client';
 import { notFound } from 'next/navigation';
 import { Heading, Flex, Card } from '@radix-ui/themes';
 import BugStatusBadge from '../BugStatusBadge';
+import ReactMarkdown from 'react-markdown';
 
 interface Props {
   params: { id: string };
 }
 
-const BugDetailsPage = async ({params}:Props) => {
-  const bug = await prisma.bug.findUnique({where: {id: params.id}})
+const BugDetailsPage = async ({ params }: Props) => {
+  const id = params.id;
+  const bug = await prisma.bug.findUnique({ where: { id } });
 
   if(!bug) notFound();
 
@@ -20,8 +22,8 @@ const BugDetailsPage = async ({params}:Props) => {
       <BugStatusBadge status={bug.status} />
       <p>{bug.createdAt.toDateString()}</p>
       </Flex>
-      <Card>
-      <p>{bug.description}</p>
+      <Card className='prose' my='4'>
+      <ReactMarkdown>{bug.description}</ReactMarkdown>
       </Card>
       
       
