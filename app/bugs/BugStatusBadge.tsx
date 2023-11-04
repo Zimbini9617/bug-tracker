@@ -7,7 +7,7 @@ Status,
 {label: string, color: 'orange' | 'green' | 'blue'}> = {
   OPEN:{ label: 'Open', color: 'orange' },
   IN_PROGRESS:{ label: 'In progress', color: 'green' },
-  CLOSE:{ label: 'Close', color: 'blue' },
+  CLOSE:{ label: 'Close', color: 'blue' }
 }
 const BugStatusBadge = ({status}: {status:Status}) => {
   return (
