@@ -1,11 +1,10 @@
 import React from 'react';
-import { Table, Badge } from '@radix-ui/themes';
-import Link from '../components/Link';
+import { Table } from '@radix-ui/themes';
 import prisma from '@/prisma/client';
-import BugStatusBadge from './BugStatusBadge';
 import delay from 'delay';
 import BugActions from './BugActions';
-import classNames from 'classnames';
+import { Link, BugStatusBadge } from '../components';
+
 
 const BugPage = async () => {
   const bugs = await prisma.bug.findMany();
