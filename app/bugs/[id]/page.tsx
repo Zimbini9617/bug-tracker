@@ -1,9 +1,7 @@
 import React from 'react';
 import prisma from '@/prisma/client';
 import { notFound } from 'next/navigation';
-import { Heading, Flex, Card, Grid, Box } from '@radix-ui/themes';
-import BugStatusBadge from '../../components/BugStatusBadge';
-import ReactMarkdown from 'react-markdown';
+import { Grid, Box } from '@radix-ui/themes';
 import EditBugButton from './EditBugButton';
 import BugDetails from './BugDetails';
 

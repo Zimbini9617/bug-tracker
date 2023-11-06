@@ -1,4 +1,5 @@
 import { BugStatusBadge } from '@/app/components'
+import { Bug } from '@prisma/client'
 import { Heading, Flex, Card } from '@radix-ui/themes'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
