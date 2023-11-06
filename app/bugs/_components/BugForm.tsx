@@ -30,9 +30,13 @@ const BugForm = ({bug}: {bug:Bug}) => {
     {error && (<Callout.Root className='mb-5'>
       <Callout.Text color='green'>{error}</Callout.Text>
       </Callout.Root>)}
-    <form className='space-y-3' onSubmit={handleSubmit(async (data)=>{
+    <form
+    className='space-y-3' onSubmit={handleSubmit(async (data)=>{
       try{
         setSubmitting(true)
+        if(bug)
+        await axios.patch('/api/bugs/edit/' + bug.id, data)
+        else
         await axios.post('/api/bugs', data);
       router.push('/bugs');
       router.refresh();
