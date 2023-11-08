@@ -6,13 +6,16 @@ import {AiFillBug} from 'react-icons/ai';
 import classnames from 'classnames';
 
 
+
 const NavBar = () => {
   const pathname = usePathname();
   
   const links = [
     {id:1, href:'/', label:'DASHBOARD'},
     {id:2, href:'/bugs', label:'BUGS'},
-    {id:3, href:'https://cloud.mongodb.com/v2/653a5362dda6784ed197582f#/metrics/replicaSet/653a56106153ff132ed48309/explorer/bugtracker/Bug/find', label:'MONGODB-CONNECTION'}
+    {id:3, href:'https://cloud.mongodb.com/v2/653a5362dda6784ed197582f#/metrics/replicaSet/653a56106153ff132ed48309/explorer/bugtracker/Bug/find', label:'MONGODB-CONNECTION'},
+    {id:4, href:'/contact', label:'CONTACT'},
+    {id:4, href:'/about', label:'ABOUT'},
   ];
   return (
   <nav className='flex space-x-10 px-5 border-b h-14 mb-10 items-center transition-colors'>

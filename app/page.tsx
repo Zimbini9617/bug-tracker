@@ -1,10 +1,12 @@
-import Image from 'next/image'
+import Image from 'next/image';
+import HeroPage from './components/HeroPage';
+
 
 export default function Home() {
   return (
     <div>
     <main className=''>
-      <h1>This is my home page</h1>
+      <HeroPage />
     </main>
     </div>
   )
