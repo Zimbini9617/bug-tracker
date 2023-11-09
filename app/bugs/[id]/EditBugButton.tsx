@@ -5,7 +5,7 @@ import React from 'react';
 
 const EditBugButton = ({ bugId }: { bugId: string }) => {
   return (
-    <Button>
+    <Button color='green'>
       <Pencil2Icon />
       <Link href={`/bugs/edit/${bugId}`}>UPDATE BUG</Link>
     </Button>

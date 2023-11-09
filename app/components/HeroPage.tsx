@@ -13,8 +13,8 @@ const HeroPage = () => {
       </div>
 
       <div className='mx-auto text-center justify-between text-[#003231]'>
-        <h2 className='font-bold text-xl gap-y-2'>Struggling with bugs on your laptop/computer?</h2>
-        <p>We are the help you need. We are the best at what we do, call us to make appointment</p>
+        <h2 className='font-bold text-xl gap-2'>Struggling with bugs on your laptop/computer?</h2>
+        <p>We are the help you need. We are the best at what we do, call us to make an appointment</p>
       </div>
       </div>
     </>

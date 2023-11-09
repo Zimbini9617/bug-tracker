@@ -1,9 +1,10 @@
 import React from 'react';
 import prisma from '@/prisma/client';
 import { notFound } from 'next/navigation';
-import { Grid, Box } from '@radix-ui/themes';
+import { Grid, Box, Flex } from '@radix-ui/themes';
 import EditBugButton from './EditBugButton';
 import BugDetails from './BugDetails';
+import DeleteBugButton from './DeleteBugButton';
 
 interface Props {
   params: { id: string };
@@ -16,12 +17,15 @@ const BugDetailsPage = async ({ params }: Props) => {
   if(!bug) notFound();
 
   return (
-    <Grid columns={{initial: '1', md: '2'}} gap='4'>
-      <Box>
+    <Grid columns={{initial: '1', sm: '5'}} gap='4'>
+      <Box className='md:col-span-4'>
         <BugDetails bug = {bug}/>
       </Box>
       <Box>
+        <Flex direction='column' gap='5'>
         <EditBugButton bugId={bug.id}/>
+        <DeleteBugButton />
+        </Flex>
       </Box>
     </Grid>
   );

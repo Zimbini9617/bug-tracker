@@ -12,7 +12,7 @@ const BugDetails = ({ bug }:{ bug: Bug }) => {
           <BugStatusBadge status={bug.status} />
           <p>{bug.createdAt.toDateString()}</p>
         </Flex>
-        <Card className='prose' my='4'>
+        <Card className='prose max-w-full' my='4'>
           <ReactMarkdown>{bug.description}</ReactMarkdown>
         </Card>
         </>
