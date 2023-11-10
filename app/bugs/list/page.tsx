@@ -3,7 +3,7 @@ import { Table } from '@radix-ui/themes';
 import prisma from '@/prisma/client';
 import delay from 'delay';
 import BugActions from './BugActions';
-import { Link, BugStatusBadge } from '../components';
+import { Link, BugStatusBadge } from '../../components';
 
 
 const BugPage = async () => {

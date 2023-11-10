@@ -19,3 +19,7 @@ const newBug = await prisma.bug.create({
 return NextResponse.json(newBug, {status: 201})
 }
 
+
+export async function DELETE(request: NextRequest){
+  
+  }

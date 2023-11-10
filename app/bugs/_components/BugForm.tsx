@@ -36,7 +36,7 @@ const BugForm = ({bug}: {bug:Bug}) => {
         await axios.patch('/api/bugs/edit/' + bug.id, data)
         else
         await axios.post('/api/bugs', data);
-      router.push('/bugs');
+      router.push('/bugs/list');
       router.refresh();
       }
       catch(error){
