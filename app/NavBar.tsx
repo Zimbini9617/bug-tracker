@@ -4,12 +4,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {AiFillBug} from 'react-icons/ai';
 import classnames from 'classnames';
-
+import { useSession } from 'next-auth/react';
+import { Box } from '@radix-ui/themes';
 
 
 const NavBar = () => {
   const pathname = usePathname();
-  
+  const {status, data: session} = useSession()
   const links = [
     {id:1, href:'/', label:'DASHBOARD'},
     {id:2, href:'/bugs/list', label:'BUGS'},
@@ -18,6 +19,7 @@ const NavBar = () => {
     {id:4, href:'/about', label:'ABOUT'},
   ];
   return (
+    <>
   <nav className='flex space-x-10 px-5 border-b h-14 mb-10 items-center transition-colors'>
     <Link href='/'>
       <AiFillBug className='text-3xl text-gray-700 hover:text-gray-400'/>
@@ -35,11 +37,14 @@ const NavBar = () => {
         })}>{link.label}
         </Link>
       ))}
-   
     </ul>
   </nav>
-    
-  )
-}
+        <Box>
+          {status === 'authenticated' && (<Link href='/api/auth/signout'>Logout</Link>)}
+          {status === 'unauthenticated' && (<Link href='/api/auth/signin'>Login</Link>)}
+        </Box>
+      </>  
+  );
+};
 
 export default NavBar
