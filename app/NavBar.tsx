@@ -6,6 +6,7 @@ import {AiFillBug} from 'react-icons/ai';
 import classnames from 'classnames';
 import { useSession } from 'next-auth/react';
 import { Avatar, Box, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes';
+import Skeleton from '@/app/components/Skeleton';
 
 
 const NavBar = () => {
@@ -59,6 +60,8 @@ const NavLinks =()=>{
 
 const AuthStatus =()=> {
   const {status, data: session} = useSession();
+  if(status === 'unauthenticated') return <Link href='/api/auth/signin'>Login</Link>;
+  if(status === 'loading') <Skeleton />
   return(
     <Box>
           {status === 'authenticated' && (
@@ -80,7 +83,7 @@ const AuthStatus =()=> {
             </DropdownMenu.Root>
           
           )}
-          {status === 'unauthenticated' && (<Link href='/api/auth/signin'>Login</Link>)}
+          
         </Box>
   )
 }
