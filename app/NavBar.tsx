@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import {AiFillBug} from 'react-icons/ai';
 import classnames from 'classnames';
 import { useSession } from 'next-auth/react';
-import { Box } from '@radix-ui/themes';
+import { Box, Container, Flex } from '@radix-ui/themes';
 
 
 const NavBar = () => {
@@ -20,7 +20,10 @@ const NavBar = () => {
   ];
   return (
     <>
-  <nav className='flex space-x-10 px-5 border-b h-14 mb-10 items-center transition-colors'>
+    <Box className='border-b h-14 mb-10 mt-4 font-mono'>
+      <Container>
+        <Flex justify='between' align='center'>
+  <nav className='flex space-x-10 px-5 mt-3  items-center transition-colors'>
     <Link href='/'>
       <AiFillBug className='text-3xl text-gray-700 hover:text-gray-400'/>
     </Link>
@@ -42,6 +45,9 @@ const NavBar = () => {
         <Box>
           {status === 'authenticated' && (<Link href='/api/auth/signout'>Logout</Link>)}
           {status === 'unauthenticated' && (<Link href='/api/auth/signin'>Login</Link>)}
+        </Box>
+        </Flex>
+        </Container>
         </Box>
       </>  
   );
