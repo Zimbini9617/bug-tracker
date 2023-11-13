@@ -5,7 +5,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import NavBar from './NavBar';
-import Footer from './components/Footer';
 import AuthProvider from './auth/Provider';
 import { Container } from '@radix-ui/themes';
 
@@ -32,7 +31,7 @@ export default function RootLayout({
         </main>
         </Theme>
         </AuthProvider>
-        <Footer />
+        
       </body>
     </html>
   )
