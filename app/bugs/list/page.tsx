@@ -4,10 +4,23 @@ import prisma from '@/prisma/client';
 import delay from 'delay';
 import BugActions from './BugActions';
 import { Link, BugStatusBadge } from '../../components';
+import { Status } from '@prisma/client';
 
+interface Props {
+  searchParams: { status: Status };
+}
 
-const BugPage = async () => {
-  const bugs = await prisma.bug.findMany();
+const BugPage = async ({ searchParams }: Props) => {
+  const statuses = Object.values(Status);
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+    
+  const bugs = await prisma.bug.findMany({
+    where: { 
+      status, 
+    },
+  });
   delay(2000);
   return (
     <div className='max-w-2xl'>
@@ -42,7 +55,9 @@ const BugPage = async () => {
 </Table.Root>
       </div>
     </div>
-  )
-}
+  );
+};
+
+export const dynamic = 'force-dynamic';
 
 export default BugPage;
