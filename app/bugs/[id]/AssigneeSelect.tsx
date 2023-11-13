@@ -4,8 +4,8 @@ import { Select } from '@radix-ui/themes';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import Skeleton from '@/app/components/Skeleton';
-import BugActions from '../list/BugActions';
 import { Bug } from '@prisma/client';
+import toast, { Toaster } from "react-hot-toast";
 
 const AssigneeSelect = ({bug}:{bug:Bug}) => {
 const {
@@ -22,11 +22,14 @@ if (isLoading) return <Skeleton />;
 if (error) return null;
 
 return (
+  <>
 <Select.Root
 defaultValue={bug.assignedToUserId || 'Unassigned'} 
 onValueChange={(userId)=>{
 axios.patch('/api/bugs/edit/' + bug.id, {
   assignedToUserId: userId || null,
+}).catch(() => {
+  toast.error("Changes could not be saved.")
 });
 }}>
   
@@ -44,6 +47,8 @@ axios.patch('/api/bugs/edit/' + bug.id, {
         <Select.Separator />
       </Select.Content>
     </Select.Root>
+    <Toaster />
+    </>
   );
 };
 
