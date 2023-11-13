@@ -7,17 +7,25 @@ import Skeleton from '@/app/components/Skeleton';
 import { Bug } from '@prisma/client';
 import toast, { Toaster } from "react-hot-toast";
 
+
 const AssigneeSelect = ({bug}:{bug:Bug}) => {
+
+  const assignBug = (userId: string) => {
+    axios
+      .patch("/api/issues/" + bug.id, {
+        assignedToUserId: userId || null,
+      })
+      .catch(() => {
+        toast.error("Changes could not be saved.");
+      });
+  };
+  
 const {
 data: users,
 error,
 isLoading,
-} = useQuery<User[]>({
-queryKey: ['users'],
-queryFn: () => axios.get('/api/users').then((res) => res.data),
-staleTime: 60 * 1000,
-retry: 3,
-});
+} = useUsers();
+
 if (isLoading) return <Skeleton />;
 if (error) return null;
 
@@ -25,13 +33,7 @@ return (
   <>
 <Select.Root
 defaultValue={bug.assignedToUserId || 'Unassigned'} 
-onValueChange={(userId)=>{
-axios.patch('/api/bugs/edit/' + bug.id, {
-  assignedToUserId: userId || null,
-}).catch(() => {
-  toast.error("Changes could not be saved.")
-});
-}}>
+onValueChange={assignBug}>
   
 <Select.Trigger placeholder="Assign..." />
       <Select.Content>
@@ -51,5 +53,13 @@ axios.patch('/api/bugs/edit/' + bug.id, {
     </>
   );
 };
+
+const useUsers = () =>
+  useQuery<User[]>({
+    queryKey: ['users'],
+    queryFn: () => axios.get('/api/users').then((res) => res.data),
+    staleTime: 60 * 1000, 
+    retry: 3,
+  });
 
 export default AssigneeSelect;
