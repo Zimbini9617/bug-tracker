@@ -1,14 +1,16 @@
-import { Button } from '@radix-ui/themes';
+import { Button, Flex } from '@radix-ui/themes';
 import Link from 'next/link';
 import React from 'react';
+import BugStatusFilter from './BugStatusFilter';
 
 const BugActions = () => {
   return (
-    <div className='mb-4'>
+    <Flex mb='4' justify='between'>
+      <BugStatusFilter />
       <Button >
         <Link href='/api/bugs/new'>ADD NEW BUG</Link>
       </Button>
-      </div>
+      </Flex>
   )
 }
 
