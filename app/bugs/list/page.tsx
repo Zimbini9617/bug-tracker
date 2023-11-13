@@ -8,7 +8,7 @@ import { Link, BugStatusBadge } from '../../components';
 
 const BugPage = async () => {
   const bugs = await prisma.bug.findMany();
-  delay(5000);
+  delay(2000);
   return (
     <div className='max-w-2xl'>
       <BugActions />
