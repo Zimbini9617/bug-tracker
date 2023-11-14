@@ -4,10 +4,12 @@ import prisma from '@/prisma/client';
 import delay from 'delay';
 import BugActions from './BugActions';
 import { Link, BugStatusBadge } from '../../components';
-import { Status } from '@prisma/client';
+import { Status, Bug } from '@prisma/client';
+import { ArrowUpIcon } from '@radix-ui/react-icons';
+import NextLink from 'next/link';
 
 interface Props {
-  searchParams: { status: Status };
+  searchParams: { status: Status; orderBy: keyof Bug };
 }
 
 const BugPage = async ({ searchParams }: Props) => {
@@ -22,6 +24,12 @@ const BugPage = async ({ searchParams }: Props) => {
     },
   });
   delay(2000);
+
+  const columns: {label: string; value: keyof Bug; className?:string}[] = [
+    {label: 'Bug', value: 'title'},
+    {label:'Status', value: 'status', className:'hidden md:table-cell'},
+    {label: 'Created', value: 'createdAt', className:'hidden md:table-cell'}
+  ];
   return (
     <div className='max-w-2xl'>
       <BugActions />
@@ -29,9 +37,20 @@ const BugPage = async ({ searchParams }: Props) => {
       <Table.Root variant='surface'>
   <Table.Header>
     <Table.Row>
-      <Table.ColumnHeaderCell>BUGS</Table.ColumnHeaderCell>
-      <Table.ColumnHeaderCell className='hidden md:table-cell'>STATUS</Table.ColumnHeaderCell>
-      <Table.ColumnHeaderCell className='hidden md:table-cell'>CREATED</Table.ColumnHeaderCell>
+      {columns.map((column)=>(
+        <Table.ColumnHeaderCell key={column.label}>
+        <NextLink
+          href={{ query: { ...searchParams, orderBy: column.value } }}
+        >
+          {' '}
+          {column.label}
+        </NextLink>
+        {column.value === searchParams.orderBy && (
+          <ArrowUpIcon className="inline" />
+        )}
+      </Table.ColumnHeaderCell>
+      ))}
+      
     </Table.Row>
   </Table.Header>
   <Table.Body>
