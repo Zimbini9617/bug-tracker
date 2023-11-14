@@ -1,7 +1,6 @@
 import React from 'react';
 import { Table } from '@radix-ui/themes';
 import prisma from '@/prisma/client';
-import delay from 'delay';
 import BugActions from './BugActions';
 import { Link, BugStatusBadge } from '../../components';
 import { Status, Bug } from '@prisma/client';
@@ -17,19 +16,23 @@ const BugPage = async ({ searchParams }: Props) => {
   const status = statuses.includes(searchParams.status)
     ? searchParams.status
     : undefined;
-    
+
+    const columns: {label: string; value: keyof Bug; className?:string}[] = [
+      {label: 'Bug', value: 'title'},
+      {label:'Status', value: 'status', className:'hidden md:table-cell'},
+      {label: 'Created', value: 'createdAt', className:'hidden md:table-cell'}
+    ];
+   
+    const orderBy = columns.map((column)=>column.value).includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: 'asc' }
+    : undefined;
   const bugs = await prisma.bug.findMany({
     where: { 
-      status, 
+      status 
     },
+    orderBy,
   });
-  delay(2000);
-
-  const columns: {label: string; value: keyof Bug; className?:string}[] = [
-    {label: 'Bug', value: 'title'},
-    {label:'Status', value: 'status', className:'hidden md:table-cell'},
-    {label: 'Created', value: 'createdAt', className:'hidden md:table-cell'}
-  ];
+  
   return (
     <div className='max-w-2xl'>
       <BugActions />
