@@ -10,8 +10,8 @@ interface Props {
 
 const BugSummary = ({ open, inProgress, closed }: Props) => {
   const containers: { label: string; value: number; status: Status }[] = [
-    { label: 'Open Issue', value: open, status: 'OPEN' },
-    { label: 'In Progress', value: inProgress, status: 'IN_PROGRESS' },
+    { label: 'Opened Bugs', value: open, status: 'OPEN' },
+    { label: 'In_Progress', value: inProgress, status: 'IN_PROGRESS' },
     { label: 'Closed', value: closed, status: 'CLOSE' },
   ];
   return (

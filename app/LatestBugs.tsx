@@ -3,7 +3,7 @@ import { Card, Table, Flex, Heading, Avatar } from '@radix-ui/themes';
 import prisma from '@/prisma/client';
 import Link from 'next/link';
 import { BugStatusBadge } from './components';
-import { Bug } from '@prisma/client';
+;
 
 const LatestBugs = async () => {
   const bugs = await prisma.bug.findMany({
@@ -17,7 +17,7 @@ const LatestBugs = async () => {
   return (
     <Card>
       <Heading size="4" mb="5" className="border-b-2 text-zinc-500">
-        Latest Bugs
+        LATEST BUGS
       </Heading>
       <Table.Root>
         <Table.Body>
@@ -26,7 +26,7 @@ const LatestBugs = async () => {
               <Table.Cell>
                 <Flex justify="between" align="center">
                   <Flex direction="column" gap="3" align="start">
-                    <Link href={`/issues/${bug.id}`}>{bug.title}</Link>
+                    <Link href={`/bugs/${bug.id}`}>{bug.title}</Link>
                     <BugStatusBadge status={bug.status} />
                   </Flex>
                   <Avatar

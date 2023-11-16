@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { cache } from 'react';
 import prisma from '@/prisma/client';
 import { notFound } from 'next/navigation';
 import { Grid, Box, Flex } from '@radix-ui/themes';
@@ -12,10 +12,12 @@ import AssigneeSelect from './AssigneeSelect';
 interface Props {
   params: { id: string };
 }
+const fetchUser = cache((bugId: string) =>
+  prisma.bug.findUnique({ where: { id: bugId } })
+);
 
 const BugDetailsPage = async ({ params }: Props) => {
-  const id = params.id;
-  const bug = await prisma.bug.findUnique({ where: { id } });
+   const bug = await fetchUser(params.id);
 
   const session = await getServerSession(authOption)
 
@@ -36,5 +38,14 @@ const BugDetailsPage = async ({ params }: Props) => {
     </Grid>
   );
 };
+
+export async function generateMetadata({ params }: Props) {
+  const bug = await fetchUser(params.id);
+
+  return {
+    title: bug?.title,
+    description: 'Details of bug ' + bug?.id,
+  };
+}
 
 export default BugDetailsPage;

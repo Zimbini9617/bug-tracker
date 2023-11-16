@@ -12,8 +12,8 @@ interface Props {
 
 const BugChart = ({ open, inProgress, closed }: Props) => {
   const data = [
-    { label: 'Open Issue', value: open },
-    { label: 'In Progress', value: inProgress },
+    { label: 'Opened Bugs', value: open },
+    { label: 'In_Progress', value: inProgress },
     { label: 'Closed', value: closed },
   ];
 
