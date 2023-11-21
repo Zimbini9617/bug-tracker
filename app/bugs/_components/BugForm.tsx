@@ -37,11 +37,11 @@ const BugForm = ({bug}: {bug:Bug}) => {
         else
         await axios.post('/api/bugs', data);
       router.push('/bugs/list');
-      router.refresh();
-      }
+           }
       catch(error){
         setSubmitting(false)
-        setError('Unexpected Error happened')
+        console.error('Error happened:', error);
+        setError('Unexpected Error happened');
       }
     })}>
       <TextField.Root>
@@ -52,7 +52,7 @@ const BugForm = ({bug}: {bug:Bug}) => {
 
       <Controller control={control} name='description' defaultValue={bug?.description} render={({field})=> (<SimpleMDE placeholder='Description' {...field}/>)}/>
 
-      <ErrorMessage> {errors.title?.message}</ErrorMessage>
+      <ErrorMessage> {errors.description?.message}</ErrorMessage>
       <Button disabled={isSubmitting}>
         {bug ? 'Update Bug': 'Submit New Bug'}{' '} {isSubmitting && <Spinner />} </Button>
     </form>
