@@ -13,7 +13,7 @@ const NavBar = () => {
   
   return (
     <>
-    <Box className='border-b h-14 mb-10 mt-4 font-mono'>
+    <Box className='border-b h-24 mb-10 mt-5 font-mono'>
       <Container>
         <Flex justify='between' align='center'>
         <NavLinks />
