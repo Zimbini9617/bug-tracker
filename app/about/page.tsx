@@ -13,11 +13,19 @@ const AboutPage = () => {
     </div>
 
     <div>
-      <p className='text-[#425E5B] text-xl mt-10'>
+      <p className='text-[#425E5B] text-xl mt-10 mb-4'>
         We are passionate about helping our customers to stay free of bugs on their devices.<br />
         We are excited to play a huge role in bringing faster way to fix bugs, in a more affordable<br /> way to all communities.<br />
         We promise to give the best services as possible to our beloved customers.
       </p>
+    </div>
+
+    <div className=''>
+      <h3 className='text-[#425E5B] font-bold text-3xl mx-auto text-center mt-6'>THE BUG TRACKER STORY</h3>
+      <p className='text-[#425E5B] text-xl mt-6 mb-10'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque alias earum a qui repellat laborum iure maiores cum, rem cumque, numquam repellendus nobis architecto sunt dolorem expedita. Repudiandae, dolor. Consequatur!<br />
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam natus adipisci dolorum explicabo velit totam eveniet libero, nulla voluptates iure debitis, ducimus perferendis animi inventore impedit dolor, neque sit? Veritatis.</p>
+
+      <p className='text-[#425E5B] text-xl mt-6 mb-10'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam tempora cumque consequuntur esse at a natus repudiandae expedita error doloremque earum, rerum tempore libero ratione commodi exercitationem. Nostrum, vero velit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius culpa molestiae assumenda animi impedit itaque dignissimos vero blanditiis ad nisi. Unde nihil fugiat laborum, consectetur id eveniet obcaecati a. Soluta!</p>
     </div>
     </>
   )
